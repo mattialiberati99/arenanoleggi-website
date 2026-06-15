@@ -3,7 +3,7 @@
  * Fonte: Visura ordinaria CCIAA Verona (doc. T646777906, 14/04/2026).
  * Usati in footer, pagine legali (privacy/cookie), structured data SEO e contatti.
  *
- * NOTA: email/telefono pubblici e orari sono PLACEHOLDER — da confermare con il cliente.
+ * NOTA: il telefono è provvisorio (referente) e gli orari non sono ancora definiti.
  */
 export const company = {
 	legalName: 'Arena Noleggi S.r.l.',
@@ -31,9 +31,9 @@ export const company = {
 
 	// Contatti
 	pec: 'arenanoleggisrl@legalmail.it',
-	email: 'info@arenanoleggi.it', // PLACEHOLDER — da confermare
-	phone: '+39 000 000 0000', // PLACEHOLDER — da confermare
-	whatsapp: '+39 000 000 0000', // PLACEHOLDER — da confermare
+	email: 'arenanoleggiosrl@libero.it',
+	phone: '+39 377 486 5256', // numero provvisorio (referente)
+	whatsapp: '+39 377 486 5256',
 
 	// Web / social (PLACEHOLDER)
 	domain: 'arenanoleggi.it',

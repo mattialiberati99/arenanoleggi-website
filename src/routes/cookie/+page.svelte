@@ -2,13 +2,14 @@
 	import { resolve } from '$app/paths';
 	import Logo from '$lib/components/Logo.svelte';
 	import SiteFooter from '$lib/components/SiteFooter.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { company } from '$lib/company';
 </script>
 
-<svelte:head>
-	<title>Cookie Policy · {company.brandName}</title>
-	<meta name="description" content="Informativa sull'uso dei cookie su {company.url}." />
-</svelte:head>
+<Seo
+	title={`Cookie Policy · ${company.brandName}`}
+	description={`Informativa sull'uso dei cookie su ${company.domain}.`}
+/>
 
 <header class="border-b border-sand-200 bg-sand-50">
 	<div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">

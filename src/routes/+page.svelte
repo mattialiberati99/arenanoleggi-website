@@ -8,6 +8,8 @@
 	import ServiceCard from '$lib/components/ServiceCard.svelte';
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ContactForm from '$lib/components/ContactForm.svelte';
+	import Seo from '$lib/components/Seo.svelte';
+	import { localBusinessJsonLd } from '$lib/seo';
 	import { reveal } from '$lib/actions/reveal';
 	import { img, photos } from '$lib/images';
 	import { vehicles, services } from '$lib/data/fleet';
@@ -71,13 +73,11 @@
 		'w-full rounded-xl border border-white/15 bg-white/10 px-4 py-2.5 text-white placeholder:text-sand-400 focus:border-white/40 focus:ring-2 focus:ring-white/20 focus:outline-none [color-scheme:dark]';
 </script>
 
-<svelte:head>
-	<title>Arena Noleggi · Autonoleggio a Verona — auto, furgoni, 9 posti</title>
-	<meta
-		name="description"
-		content="Noleggio auto, furgoni, minibus 9 posti e macchinari edili a Verona e provincia. Prezzi chiari a partire da 29€/giorno, assicurazione inclusa e parcheggio aeroporto con navetta."
-	/>
-</svelte:head>
+<Seo
+	title="Arena Noleggi · Autonoleggio a Verona — auto, furgoni, 9 posti"
+	description="Noleggio auto, furgoni, minibus 9 posti e macchinari edili a Verona e provincia. Prezzi chiari a partire da 29€/giorno, assicurazione inclusa e parcheggio aeroporto con navetta."
+	jsonLd={localBusinessJsonLd()}
+/>
 
 <div id="top"></div>
 <SiteHeader />

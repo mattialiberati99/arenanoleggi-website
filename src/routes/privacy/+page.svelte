@@ -2,16 +2,14 @@
 	import { resolve } from '$app/paths';
 	import Logo from '$lib/components/Logo.svelte';
 	import SiteFooter from '$lib/components/SiteFooter.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { company } from '$lib/company';
 </script>
 
-<svelte:head>
-	<title>Privacy Policy · {company.brandName}</title>
-	<meta
-		name="description"
-		content="Informativa sul trattamento dei dati personali di {company.legalName}."
-	/>
-</svelte:head>
+<Seo
+	title={`Privacy Policy · ${company.brandName}`}
+	description={`Informativa sul trattamento dei dati personali di ${company.legalName}.`}
+/>
 
 <header class="border-b border-sand-200 bg-sand-50">
 	<div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">

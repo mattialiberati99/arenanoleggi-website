@@ -9,21 +9,34 @@
 	import SectionHeading from '$lib/components/SectionHeading.svelte';
 	import ContactForm from '$lib/components/ContactForm.svelte';
 	import ServiceCard from '$lib/components/ServiceCard.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { reveal } from '$lib/actions/reveal';
 	import { img } from '$lib/images';
 	import { services } from '$lib/data/fleet';
 	import { company } from '$lib/company';
+	import { serviceJsonLd, SITE_URL } from '$lib/seo';
 
 	let { data } = $props();
 	const service = $derived(data.service);
 	const related = $derived(data.related);
 	const others = $derived(services.filter((s) => s.slug !== service.slug));
+
+	const jsonLd = $derived(
+		serviceJsonLd(
+			service.title,
+			service.description,
+			`${SITE_URL}/servizi/${service.slug}`,
+			service.fromPrice
+		)
+	);
 </script>
 
-<svelte:head>
-	<title>{service.title} a Verona · {company.brandName}</title>
-	<meta name="description" content={service.description} />
-</svelte:head>
+<Seo
+	title={`${service.title} a Verona · ${company.brandName}`}
+	description={service.description}
+	image={img(service.image, 1200, 630)}
+	{jsonLd}
+/>
 
 <div id="top"></div>
 <SiteHeader />

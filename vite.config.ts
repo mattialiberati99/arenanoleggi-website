@@ -15,6 +15,12 @@ export default defineConfig({
 			},
 			adapter: adapter()
 		}),
-		paraglideVitePlugin({ project: './project.inlang', outdir: './src/lib/paraglide' })
+		paraglideVitePlugin({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			// Rilevamento locale: URL (link condivisibili/SEO) → cookie (scelta salvata)
+			// → lingua del dispositivo/browser → italiano (base).
+			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale']
+		})
 	]
 });

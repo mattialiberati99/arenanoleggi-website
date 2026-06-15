@@ -4,6 +4,7 @@
 	import Logo from './Logo.svelte';
 	import Button from './Button.svelte';
 	import Icon from './Icon.svelte';
+	import LanguageSwitcher from './LanguageSwitcher.svelte';
 	import { company } from '$lib/company';
 
 	let scrolled = $state(false);
@@ -56,8 +57,8 @@
 			{/each}
 		</nav>
 
-		<!-- azioni -->
-		<div class="hidden items-center gap-3 lg:flex">
+		<!-- azioni desktop -->
+		<div class="hidden items-center gap-2 lg:flex">
 			<a
 				href={tel}
 				class="flex items-center gap-2 text-sm font-semibold transition-colors {scrolled
@@ -67,34 +68,38 @@
 				<Icon name="phone" size={16} />
 				Chiama
 			</a>
+			<LanguageSwitcher light={!scrolled} />
 			<Button href="#contatti" size="sm">Richiedi preventivo</Button>
 		</div>
 
-		<!-- toggle mobile -->
-		<button
-			class="flex size-10 items-center justify-center rounded-full transition-colors lg:hidden {scrolled
-				? 'text-ink hover:bg-sand-100'
-				: 'text-white hover:bg-white/10'}"
-			aria-label={open ? 'Chiudi menu' : 'Apri menu'}
-			aria-expanded={open}
-			onclick={() => (open = !open)}
-		>
-			<svg
-				width="22"
-				height="22"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
+		<!-- azioni mobile -->
+		<div class="flex items-center gap-1 lg:hidden">
+			<LanguageSwitcher light={!scrolled} />
+			<button
+				class="flex size-10 items-center justify-center rounded-full transition-colors {scrolled
+					? 'text-ink hover:bg-sand-100'
+					: 'text-white hover:bg-white/10'}"
+				aria-label={open ? 'Chiudi menu' : 'Apri menu'}
+				aria-expanded={open}
+				onclick={() => (open = !open)}
 			>
-				{#if open}
-					<path d="M6 6l12 12M18 6l-12 12" />
-				{:else}
-					<path d="M4 7h16M4 12h16M4 17h16" />
-				{/if}
-			</svg>
-		</button>
+				<svg
+					width="22"
+					height="22"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+				>
+					{#if open}
+						<path d="M6 6l12 12M18 6l-12 12" />
+					{:else}
+						<path d="M4 7h16M4 12h16M4 17h16" />
+					{/if}
+				</svg>
+			</button>
+		</div>
 	</div>
 
 	<!-- menu mobile -->
