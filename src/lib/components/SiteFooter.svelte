@@ -86,6 +86,15 @@
 							>Cookie Policy</a
 						>
 					</li>
+					<li>
+						<button
+							type="button"
+							class="text-sand-400 transition-colors hover:text-white"
+							onclick={() => window.dispatchEvent(new Event('open-cookie-preferences'))}
+						>
+							Preferenze cookie
+						</button>
+					</li>
 				</ul>
 			</div>
 

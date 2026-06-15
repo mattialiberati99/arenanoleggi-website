@@ -9,8 +9,27 @@
 			function gtag() {
 				dataLayer.push(arguments);
 			}
+			// Google Consent Mode v2 — default negato (utenti SEE) finché l'utente non sceglie
+			gtag('consent', 'default', {
+				ad_storage: 'denied',
+				ad_user_data: 'denied',
+				ad_personalization: 'denied',
+				analytics_storage: 'denied',
+				wait_for_update: 500
+			});
+			// Applica una scelta già salvata (visite successive)
+			try {
+				var saved = JSON.parse(localStorage.getItem('an-cookie-consent'));
+				if (saved) {
+					gtag('consent', 'update', {
+						analytics_storage: saved.analytics ? 'granted' : 'denied',
+						ad_storage: saved.marketing ? 'granted' : 'denied',
+						ad_user_data: saved.marketing ? 'granted' : 'denied',
+						ad_personalization: saved.marketing ? 'granted' : 'denied'
+					});
+				}
+			} catch (e) {}
 			gtag('js', new Date());
-
 			gtag('config', 'G-YQ8DHHJ7RD');
 		</script>
 
