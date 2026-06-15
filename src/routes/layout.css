@@ -1,0 +1,212 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+/* ============================================================
+   ARENA NOLEGGI — Design Tokens
+   Identità: l'Arena di Verona (archi) + il "Rosso Verona" (marmo).
+   Palette terracotta/clay + neutri caldi "pietra" + oro come accento.
+   ============================================================ */
+@theme {
+	/* Font */
+	--font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-display: 'Fraunces', 'Hanken Grotesk', ui-serif, Georgia, serif;
+
+	/* Brand — Rosso Verona / terracotta */
+	--color-brand-50: #fbf1ec;
+	--color-brand-100: #f6ddd2;
+	--color-brand-200: #edbba7;
+	--color-brand-300: #e2937a;
+	--color-brand-400: #d46a4a;
+	--color-brand-500: #c24e2c;
+	--color-brand-600: #a53e20;
+	--color-brand-700: #85331c;
+	--color-brand-800: #6a2c1b;
+	--color-brand-900: #57271a;
+
+	/* Sand — neutri caldi "pietra/marmo veronese" */
+	--color-sand-50: #faf7f2;
+	--color-sand-100: #f2ece3;
+	--color-sand-200: #e6dcce;
+	--color-sand-300: #d3c4ae;
+	--color-sand-400: #b6a286;
+	--color-sand-500: #9a8466;
+	--color-sand-600: #7d6a50;
+	--color-sand-700: #635340;
+	--color-sand-800: #463b2e;
+	--color-sand-900: #2b241c;
+
+	/* Gold — accento premium */
+	--color-gold-400: #e0a33b;
+	--color-gold-500: #ce8a24;
+	--color-gold-600: #a86e1a;
+
+	/* Ink — inchiostro caldo per il testo */
+	--color-ink: #1e1813;
+
+	/* Verde — disponibilità / successo */
+	--color-leaf-500: #3f7d52;
+	--color-leaf-600: #2f6440;
+
+	/* Raggi */
+	--radius-xl: 1rem;
+	--radius-2xl: 1.25rem;
+	--radius-3xl: 1.75rem;
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background-color: var(--color-sand-50);
+		color: var(--color-ink);
+	}
+
+	::selection {
+		background-color: var(--color-brand-500);
+		color: white;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		font-weight: 600;
+		letter-spacing: -0.01em;
+	}
+}
+
+/* ============================================================
+   ANIMAZIONI
+   ============================================================ */
+@keyframes an-fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(26px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes an-fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes an-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-14px);
+	}
+}
+
+@keyframes an-drift {
+	0% {
+		transform: translate(0, 0) scale(1);
+	}
+	50% {
+		transform: translate(2.5%, -2.5%) scale(1.04);
+	}
+	100% {
+		transform: translate(0, 0) scale(1);
+	}
+}
+
+@keyframes an-shimmer {
+	100% {
+		background-position: 200% center;
+	}
+}
+
+@keyframes an-pulse-ring {
+	0% {
+		box-shadow: 0 0 0 0 rgb(165 62 32 / 0.45);
+	}
+	70% {
+		box-shadow: 0 0 0 12px rgb(165 62 32 / 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgb(165 62 32 / 0);
+	}
+}
+
+/* Ingresso scaglionato (hero) — applica .an-enter + style="animation-delay:..." */
+.an-enter {
+	animation: an-fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Reveal allo scroll (gestito da actions/reveal.ts) */
+.an-reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+		transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+	will-change: opacity, transform;
+}
+.an-reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+.an-float {
+	animation: an-float 7s ease-in-out infinite;
+}
+.an-drift {
+	animation: an-drift 18s ease-in-out infinite;
+}
+.an-pulse {
+	animation: an-pulse-ring 2.4s ease-out infinite;
+}
+
+/* Texture grana sottile da sovrapporre */
+.an-grain::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: 0.5;
+	mix-blend-mode: soft-light;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+/* Testo con sfumatura brand */
+.an-text-gradient {
+	background: linear-gradient(
+		100deg,
+		var(--color-brand-600),
+		var(--color-brand-400),
+		var(--color-gold-500)
+	);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.an-enter,
+	.an-reveal,
+	.an-float,
+	.an-drift,
+	.an-pulse {
+		animation: none !important;
+		transition: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}

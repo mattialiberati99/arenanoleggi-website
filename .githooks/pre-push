@@ -1,0 +1,23 @@
+#!/bin/sh
+# Pre-push gate: format → lint → build. Si pusha solo se tutto passa.
+# Attivazione (una volta dopo il clone): git config core.hooksPath .githooks
+
+set -e
+
+echo "▶ pre-push: format"
+pnpm format
+
+# Se Prettier ha riformattato dei file tracciati, blocca: vanno committati.
+if ! git diff --quiet; then
+	echo "✗ Prettier ha riformattato dei file. Committa le modifiche e ripusha:"
+	git --no-pager diff --name-only
+	exit 1
+fi
+
+echo "▶ pre-push: lint"
+pnpm lint
+
+echo "▶ pre-push: build"
+pnpm build
+
+echo "✓ format + lint + build OK — push consentito"
